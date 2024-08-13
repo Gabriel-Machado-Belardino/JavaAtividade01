@@ -1,4 +1,3 @@
-import java.util.Objects;
 
 public class ObjectList {
     private Object[] listOfObjects;
@@ -11,11 +10,14 @@ public class ObjectList {
         this.listOfObjects = new Object[length];
     }
 
-    public void adicionar(Object object){
+    public void adicionar(Object object) throws Exception {
         for(int i = 0; i < this.listOfObjects.length; i++){
-            if(this.listOfObjects[i] == null) this.listOfObjects[i] = object;
+            if(this.listOfObjects[i] == null) {
+                this.listOfObjects[i] = object;
+                return;
+            }
         }
-        throw new Error("Não foi possivel inserir um novo objeto pois não há espaço");
+        throw new Exception("Não foi possivel inserir um novo objeto pois não há espaço");
     }
 
     public Object buscar(String nome){
@@ -25,16 +27,16 @@ public class ObjectList {
         return null;
     }
 
-    public void atualizar(int indice, Object object){
+    public void atualizar(int indice, Object object) throws Exception {
         if(indice > this.listOfObjects.length - 1){
-            throw new Error("A lista não possi esse indice");
+            throw new Exception("A lista não possi esse indice");
         }
         this.listOfObjects[indice] = object;
     }
 
-    public void remover(int indice){
+    public void remover(int indice)  throws Exception{
         if(indice > this.listOfObjects.length - 1){
-            throw new Error("A lista não possi esse indice");
+            throw new Exception("A lista não possi esse indice");
         }
         this.listOfObjects[indice] = null;
         if(indice <  this.listOfObjects.length){
